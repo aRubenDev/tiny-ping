@@ -7,10 +7,10 @@ import { Repository } from 'typeorm';
 
 @Injectable()
 export class HealthService {
-
   constructor(
     @InjectRepository(Health)
-    private readonly healthRepository: Repository<Health>) {}
+    private readonly healthRepository: Repository<Health>,
+  ) {}
   async create(createHealthDto: CreateHealthDto) {
     const health = this.healthRepository.create(createHealthDto);
     return await this.healthRepository.save(health);

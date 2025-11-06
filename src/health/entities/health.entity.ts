@@ -1,27 +1,26 @@
-import { Column, DeleteDateColumn, Entity, UpdateDateColumn } from "typeorm";
+import { Column, DeleteDateColumn, Entity, UpdateDateColumn } from 'typeorm';
 
 @Entity()
 export class Health {
+  @Column({ primary: true, generated: 'uuid' })
+  id: string;
 
-    @Column({ primary: true, generated: 'uuid' })
-    id: string;
+  @Column()
+  name: string;
 
-    @Column()
-    name: string;
+  @Column()
+  description?: string;
 
-    @Column()
-    description?: string;
+  @Column({
+    type: 'enum',
+    enum: ['healthy', 'unhealthy', 'unknown'],
+    default: 'unknown',
+  })
+  status?: string;
 
-    @Column({
-        type: 'enum',
-        enum: ['healthy', 'unhealthy', 'unknown'],
-        default: 'unknown'
-    })
-    status?: string;
+  @UpdateDateColumn()
+  updatedAt?: Date;
 
-    @UpdateDateColumn()
-    updatedAt?: Date;
-    
-    @DeleteDateColumn()
-    deletedAt?: Date;
+  @DeleteDateColumn()
+  deletedAt?: Date;
 }

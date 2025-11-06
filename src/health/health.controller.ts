@@ -1,24 +1,37 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { HealthService } from './health.service';
 import { CreateHealthDto } from './dto/create-health.dto';
 import { UpdateHealthDto } from './dto/update-health.dto';
-import { HealthCheck, HealthCheckService, HttpHealthIndicator } from '@nestjs/terminus';
+import {
+  HealthCheck,
+  HealthCheckService,
+  HttpHealthIndicator,
+} from '@nestjs/terminus';
 import { ConfigService } from '@nestjs/config';
 
 @Controller('health')
 export class HealthController {
-  constructor(private readonly healthService: HealthService,
+  constructor(
+    private readonly healthService: HealthService,
     private health: HealthCheckService,
     private http: HttpHealthIndicator,
-    private config: ConfigService) { }
+    private config: ConfigService,
+  ) {}
 
   @Get('check')
   @HealthCheck()
   check() {
-    const target = this.config.get<string>('PING_TARGET') || 'https://nestjs.com';
-    return this.health.check([
-      () => this.http.pingCheck('external', target),
-    ]);
+    const target =
+      this.config.get<string>('PING_TARGET') || 'https://nestjs.com';
+    return this.health.check([() => this.http.pingCheck('external', target)]);
   }
 
   @Post()
