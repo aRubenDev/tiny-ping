@@ -9,7 +9,12 @@ import { TerminusModule } from '@nestjs/terminus';
 import { HttpModule } from '@nestjs/axios';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Health]),TerminusModule, HttpModule, ConfigModule],
+  imports: [
+    TypeOrmModule.forFeature([Health]),
+    TerminusModule,
+    HttpModule,
+    ConfigModule,
+  ],
   controllers: [HealthController],
   providers: [HealthService],
 })

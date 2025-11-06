@@ -9,7 +9,7 @@ export class ResponseMiddleware implements NestMiddleware {
         statusCode: 404,
         message: res.message || 'Resource not foundssss',
       });
-    }else{
+    } else {
       const oldJson = res.json;
       res.json = function (data: any) {
         const formattedResponse = {
